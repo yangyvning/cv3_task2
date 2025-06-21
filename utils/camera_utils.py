@@ -8,7 +8,7 @@
 #
 # For inquiries contact  george.drettakis@inria.fr
 #
-
+import torch
 from scene.cameras import Camera
 import numpy as np
 from utils.graphics_utils import fov2focal
@@ -95,3 +95,4 @@ def camera_to_JSON(id, camera : Camera):
         'fx' : fov2focal(camera.FovX, camera.width)
     }
     return camera_entry
+#加载自定义位姿文件
