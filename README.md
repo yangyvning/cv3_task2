@@ -53,13 +53,12 @@ train.py通过--test_iterations参数指定测试间隔（默认情况是7000,30
 tensorboard --logdir runs
 ```
 ### 渲染
-由于3DGS官方的render.py不支持自定义相机参数导入，因此本项目自定义my_render.py来实现自定义轨迹环绕
-my_render.py 根据训练相机的中心点计算场景中心位置，然后围绕该中心点在水平平面上均匀采样相机位置，并构造朝向目标中心的相机姿态矩阵，与训练好的高斯模型配合生成对应视角的图像。按帧保存渲染结果。
+由于3DGS官方的render.py不支持自定义相机参数导入，因此本项目自定义my_generator.py自动生成环绕轨迹，my_render.py来实现自定义轨迹环绕
 ```shell
-python my_render.py -m ./output/模型目录名称 --custom_path --skip_train --skip_test --path_radius 3 --path_frames 10 --path_height 0.0
+python my_render.py -m ./项目目录 --custom_path --skip_test --json_path ./path_to_json --path_radius 3.2 --path_frames 30 --path_height 1.0
 ```
 my_render.py命令行参数
-1. --custom_path（布尔 flag）
+1. --custom_path
 作用：是否启用自定义相机轨道（如环绕物体轨迹）。
 使用该 flag 后，将触发 generate_camera_path() 生成一圈轨道；
 会渲染 custom_path/renders 下的图片；
